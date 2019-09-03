@@ -6,25 +6,20 @@ import { Provider } from 'react-redux';
 import { PersistGate } from "redux-persist/integration/react";
 import SwitchNavigator from "./Navigator/SwitchNavigator";
 import { store, persistor } from "./store";
+import RootScreen from './RootScreen';
+import AsyncStorage from '@react-native-community/async-storage'
 
 // import SplashScreen from "./screens/SplashScreen"
 
-const App = () => (
+
+const App = () =>{
+    return(
     <View style={styles.container}>
       <Provider store={store}>
         <PersistGate
           loading={
-            <View style={styles.container}>
-              <Image
-                source={require("./assets/logo1.png")}
-                style={{
-                  width: 188,
-                  height: 106,
-                  justifyContent: "center",
-                  alignSelf: "center"
-                }}
-              />
-            </View>
+            
+            <RootScreen />
           }
           persistor={persistor}
         >
@@ -34,7 +29,7 @@ const App = () => (
       </Provider>
     </View>
   );
-
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

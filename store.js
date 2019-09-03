@@ -9,7 +9,7 @@ import rootReducer from './Reducers/RootReducer';
 const saver = store => next => action => {
     let result = next(action);
     let stateToSave = store.getState();
-        AsyncStorage.setItem("lawyer_Tickets", JSON.stringify(stateToSave));
+        AsyncStorage.setItem("root", JSON.stringify(stateToSave));
         return result;
 
 }
