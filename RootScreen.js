@@ -8,8 +8,7 @@ import { connect } from 'react-redux'
 const CheckAuthValidity = (token, navigator) => {
   var status = null;
   if (token !== ''  && token !== null) {
-      console.log('let me see the token', token)
-        
+      console.log('let me see the token', token)      
         try{
           const payload = decode(token);
           if(payload.exp < Date.now() / 1000 ){
@@ -38,7 +37,6 @@ const CheckAuthValidity = (token, navigator) => {
 //we could show that network is taking too long and maybe kindly check your internet connection
 const RootScreen = (props) => {
    CheckAuthValidity(props.auth.token, props.navigation)
-    // console.log("checking navigation", props)
     return(
         <View style={styles.container}>
             <Image
