@@ -2,7 +2,7 @@ const INITIAL_STATE = {
     Auth: "",
     Error:'',
     Success:"",
-    token:""
+    token:"",
 }
 
 export default (state = INITIAL_STATE, action) => {

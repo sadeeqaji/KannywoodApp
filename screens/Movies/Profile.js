@@ -9,12 +9,11 @@ import {
   Dimensions
 } from "react-native";
 import { AsyncStorage } from "react-native";
-import {withNavigation} from "react-navigation"
-
-
+import {withNavigation} from "react-navigation";
+import {connect} from "react-redux";
+import ProfileAction from '../../Actions/ProfileAction';
 import CustomModal from "../../components/modal";
 import Avater from "../../assets/profileAvi.png";
-
 
 const width = Dimensions.get("window").width * 0.7;
 
@@ -59,13 +58,11 @@ class Profile extends Component {
     this.setState({ text: text });
   };
 
-  componentWillUnmount(){
-    const token = AsyncStorage.getItem("token")
-    if(!token){
-    }
-  }
+
 
   render() {
+    console.log("i want the profile ", this.props.Profile)
+    const {name} = this.props.Profile.Profile
     return (
       <View style={styles.container}>
         <View>
@@ -99,7 +96,7 @@ class Profile extends Component {
                   fontStyle: "normal"
                 }}
               >
-                John Doe
+                {name}
               </Text>
             </View>
             <View style={{ width: "10%" }}>
@@ -204,14 +201,12 @@ class Profile extends Component {
             </TouchableOpacity>
           </View>
           <View style={{ flexDirection: "row", width: "100%", flex: 1 }}>
-            <View syle={{ width: "70%" }}>
-              <Text style={styles.Text2}>Change Email</Text>
-            </View>
             <View
               style={{
-                width: "30%",
-                position: "absolute",
-                marginHorizontal: width
+                width: "100%",
+                flex: 1,
+                // position: "absolute",
+                // marginHorizontal: width
               }}
             >
               <CustomModal
@@ -223,7 +218,9 @@ class Profile extends Component {
                 placeholder={this.state.placeholder}
                 nameText={this.state.text2}
                 changeText={this.changeText}
-                icon={"true"}
+                // icon={"false"}
+                word = {"Change Email"}
+
                 value={this.state.namemodalEmail}
                 setModal={() => this._showmodal("m2")}
                 name="m2"
@@ -234,14 +231,13 @@ class Profile extends Component {
             </View>
           </View>
           <View style={{ flexDirection: "row", width: "100%", flex: 1 }}>
-            <View syle={{ width: "70%" }}>
-              <Text style={styles.Text2}>Change Password</Text>
-            </View>
+            
             <View
               style={{
-                width: "30%",
-                position: "absolute",
-                marginHorizontal: width
+                width: "100%",
+                flex: 1,
+               // position: "absolute",
+                // marginHorizontal: width
               }}
             >
               <CustomModal
@@ -250,10 +246,11 @@ class Profile extends Component {
                 visible={this.state.modalVisible}
                 Textstyle={{}}
                 ViewStyle={{}}
+                word = {"Change Password"}
                 placeholder={this.state.placeholder}
                 nameText={this.state.text2}
                 changeText={this.changeText}
-                icon={"true"}
+                // icon={"false"}
                 value={this.state.namemodalEmail}
                 setModal={() => this._showmodal("m3")}
                 name={"m3"}
@@ -287,4 +284,7 @@ const styles = StyleSheet.create({
     fontStyle: "normal"
   }
 });
-export default withNavigation(Profile);
+const mapStateToProps = (state) =>{
+  return{Profile : state.Profile}
+}
+export default connect(mapStateToProps)(withNavigation(Profile));

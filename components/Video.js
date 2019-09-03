@@ -15,7 +15,6 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
-
 export default class VideoPlayer extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +33,7 @@ export default class VideoPlayer extends Component {
     paused: true,
     skin: "custom",
     ignoreSilentSwitch: null,
-    isBuffering: false, 
+    isBuffering: false,
     fullscreenOrientation: "landscape"
   };
   onLoad(data) {
@@ -46,7 +45,10 @@ export default class VideoPlayer extends Component {
     // this.apiParsing();
 
     // Orientation.unlockAllOrientations();
-
+    // HideShow = () => {
+    //   setInterval
+    // }
+    
     Orientation.addOrientationListener(this._orientationDidChange);
   }
 
@@ -63,8 +65,8 @@ export default class VideoPlayer extends Component {
   onBuffer({ isBuffering }) {
     this.setState({ isBuffering });
   }
-  onPause(){
-    this.setState({paused: false})
+  onPause() {
+    this.setState({ paused: false });
   }
 
   getCurrentTimePercentage() {
@@ -184,10 +186,11 @@ export default class VideoPlayer extends Component {
           style={styles.fullScreen}
           onPress={() => {
             this.setState({ paused: !this.state.paused });
+            this.HideShow
           }}
         >
           <Video
-            source={{uri: this.props.uri}}
+            source={{ uri: this.props.uri }}
             style={styles.fullScreen}
             rate={this.state.rate}
             paused={this.state.paused}
@@ -206,39 +209,53 @@ export default class VideoPlayer extends Component {
         </TouchableOpacity>
         <View style={styles.controls}>
           <View style={styles.generalControls}>
-           <View style={styles.skinControl}> 
+            <View style={styles.skinControl}>
               {/* <Text>{this.renderSkinControl("custom")}</Text> */}
-               {/* <Text>{this.renderSkinControl("native")}</Text> */}
-               {/* <Text>{this.renderSkinControl("embed")}</Text> */}
-               
-               <TouchableOpacity onPress={() => {
-                 this.setState({muted: !this.state.muted})
-               }}> 
-                 <FontAwesome name="volume-mute" color="#FFFFFF" size={50}/>
-               </TouchableOpacity>
-                {
-                  this.state.paused &&
-                                 
-               <TouchableOpacity onPress={() => {
-                 this.setState({paused: false})
-               }}>
-               <Ionicons name="md-play" color="#FFFFFF" size={50}/>
-               </TouchableOpacity>
-               }
-               {!this.state.paused && 
-               <TouchableOpacity onPress={() => {
-                 this.setState({paused: true})
-               }}>
-               <Ionicons name="md-pause" color="#FFFFFF" size={50}/>
-               </TouchableOpacity>
-               }
-               <TouchableOpacity onPress={() => {
-                 this.setState({resizeMode: "cover"})
-               }}>
-              <MaterialIcons  name="fullscreen" color="#FFFFFF" size={50}/>
-              </TouchableOpacity>
+              {/* <Text>{this.renderSkinControl("native")}</Text> */}
+              {/* <Text>{this.renderSkinControl("embed")}</Text> */}
 
-             </View> 
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  paddingHorizontal: 1,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ muted: !this.state.muted });
+                  }}
+                >
+                  <FontAwesome name="volume-mute" color="#FFFFFF" size={30} />
+                </TouchableOpacity>
+                {this.state.paused && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({ paused: false });
+                    }}
+                  >
+                    <Ionicons name="md-play" color="#FFFFFF" size={30} />
+                  </TouchableOpacity>
+                )}
+                {!this.state.paused && (
+                  <TouchableOpacity
+                    onPress={() => {
+                      this.setState({ paused: true });
+                    }}
+                  >
+                    <Ionicons name="md-pause" color="#FFFFFF" size={30} />
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ resizeMode: "cover" });
+                  }}
+                >
+                  <MaterialIcons name="fullscreen" color="#FFFFFF" size={30} />
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
           <View style={styles.generalControls}>
             <View style={styles.rateControl}>
@@ -288,7 +305,7 @@ export default class VideoPlayer extends Component {
       <View style={styles.container}>
         <View style={styles.fullScreen}>
           <Video
-            source={{uri: this.props.uri}}
+            source={{ uri: this.props.uri }}
             style={videoStyle}
             rate={this.state.rate}
             paused={this.state.paused}
