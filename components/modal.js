@@ -15,7 +15,8 @@ const CustomModal = ({
   visibilitystatus,
   name,
   openname,
-  cancelModal
+  cancelModal,
+  word
 }) => {
   console.log(name)
   return (
@@ -89,9 +90,22 @@ const CustomModal = ({
             style={{ width: "100%" }}
           />
         )}
+        {word && (
+           <Text style={styles.Text2}>{word}</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
 };
+
+const styles={
+  Text2:{
+    lineHeight: 40,
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "normal",
+    fontStyle: "normal"
+  }
+}
 
 export default CustomModal;

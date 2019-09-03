@@ -21,7 +21,6 @@ import RNFetchBlob from 'react-native-fetch-blob'
 import RNBackgroundDownloader from 'react-native-background-downloader';
 
 
-// import { Video } from "react-native-video";
 
 
 
@@ -34,15 +33,6 @@ saveFile = async () => {
       );
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
           console.log("Permission granted");
-
-          // const fs = RNFetchBlob.fs;
-          // const base64 = RNFetchBlob.base64;
-
-          // const dirs = RNFetchBlob.fs.dirs;
-          //console.log(dirs.DownloadDir);
-
-          // const NEW_FILE_PATH = dirs.DownloadDir + '/test.txt';
-          // fs.createFile(NEW_FILE_PATH, 'foo', 'utf8');
 
       } else {
           console.log('Permission denied');
@@ -161,7 +151,7 @@ class MovieDetail extends React.Component {
           {/* <View> */}
           <View style={{flexDirection: "column", justifyContent: "center", flex: 3, paddingHorizontal: 10}}>
           <Text style={{fontWeight: "bold", fontSize: 16, color: "#FFFFFF"}}>{Movie.MovieName}</Text>
-          <Text style={{fontSize: 16, color: "#FFFFFF"}}>{Movie.category}</Text>
+          <Text style={{fontSize: 14, color: "#FFFFFF"}}>{Movie.category}</Text>
           </View>
           <View style={{flex: 1,flexDirection: "row",}}>
           <View style={{ flex: 2}}>
@@ -197,7 +187,7 @@ class MovieDetail extends React.Component {
                 fontSize: 16
               }}
             >
-              <About />
+              <About details={Movie}/>
             </Tab>
             <Tab
               heading="Cast"
@@ -301,7 +291,6 @@ const styles = StyleSheet.create({
   },
   NavStyle: {
     flex: 1,
-    top: "0%"
   }
 });
 
